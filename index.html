@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>FNOL Audit Portal</title>
+
+<style>
+body{
+font-family:Segoe UI,Arial,sans-serif;
+margin:0;
+background:#f4f4f4;
+}
+
+header{
+background:#10233f;
+color:white;
+padding:20px;
+}
+
+.container{
+padding:20px;
+max-width:1200px;
+margin:auto;
+}
+
+.card{
+background:white;
+padding:20px;
+border-radius:10px;
+margin-bottom:20px;
+box-shadow:0 2px 8px rgba(0,0,0,.1);
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:15px;
+margin-bottom:20px;
+}
+
+.kpi{
+background:white;
+padding:20px;
+border-radius:10px;
+text-align:center;
+font-weight:bold;
+}
+
+label{
+display:block;
+margin-top:10px;
+font-weight:bold;
+}
+
+input,select,textarea{
+width:100%;
+padding:10px;
+margin-top:5px;
+}
+
+button{
+background:#10233f;
+color:white;
+padding:12px 20px;
+border:none;
+margin-top:15px;
+cursor:pointer;
+border-radius:5px;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+}
+
+th,td{
+border:1px solid #ddd;
+padding:10px;
+}
+
+th{
+background:#10233f;
+color:white;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>FNOL Audit Portal</h1>
+</header>
+
+<div class="container">
+
+<div class="grid">
+<div class="kpi">Cases Logged<br>0</div>
+<div class="kpi">Cases Scored<br>0</div>
+<div class="kpi">Avg QA Score<br>0%</div>
+<div class="kpi">Avg AHT<br>0</div>
+</div>
+
+<div class="card">
+
+<h2>QA Audit Form</h2>
+
+<label>Staff Name</label>
+
+<select>
+<option>Nurtashya Aina Binti Azman</option>
+<option>Vinayagan A/L Selvaraju</option>
+<option>Thivayasri A/P Jaya Kumar</option>
+<option>Thneswary A/P Santharasekeran</option>
+<option>Muhammad Aiman Bin Mohamed Salleh</option>
+<option>Darshan A/L Murliah</option>
+</select>
+
+<label>TL Name</label>
+
+<select>
+<option>Shanthini</option>
+<option>Priya</option>
+<option>Kartigeyan</option>
+<option>Shanmugam</option>
+</select>
+
+<label>Phase</label>
+
+<select>
+<option>Phase 1</option>
+<option>Phase 2</option>
+<option>Phase 3</option>
+<option>Phase 4</option>
+<option>Phase 5</option>
+</select>
+
+<label>Client</label>
+
+<select>
+<option>Hertz</option>
+<option>Avis</option>
+<option>Gregory</option>
+<option>Serco</option>
+<option>Kier</option>
+<option>Vodafone</option>
+<option>Menzies</option>
+<option>Yodel</option>
+<option>Chubb</option>
+<option>LBO</option>
+<option>Asured</option>
+<option>KN Circet</option>
+</select>
+
+<label>Case ID</label>
+<input type="text">
+
+<label>Auditor Remarks</label>
+<textarea rows="4"></textarea>
+
+<button>Save Audit</button>
+
+</div>
+
+<div class="card">
+
+<h2>Case Ledger</h2>
+
+<table>
+<thead>
+<tr>
+<th>Case ID</th>
+<th>Staff</th>
+<th>Phase</th>
+<th>Client</th>
+<th>TL</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Example</td>
+<td>Nurtashya</td>
+<td>Phase 5</td>
+<td>Hertz</td>
+<td>Shanthini</td>
+</tr>
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</body>
+</html>
