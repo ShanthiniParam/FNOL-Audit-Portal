@@ -12,13 +12,20 @@ background:#f3ecff;
 }
 
 header{
-background:#10233f;
+background:#7c3aed;
 color:white;
 padding:20px;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+z-index:1000
 }
 
 .container{
-padding:20px;
+padding-top:140px;
+padding-left:20px;
+padding-right:20px;
 max-width:1200px;
 margin:auto;
 }
@@ -91,14 +98,10 @@ color:white;
 <h1>FNOL Audit Portal</h1>
 </header>
 
-<div style="background:white;padding:15px;">
-8
+<div id="menuBar">
 <button onclick="showPage('dashboard')">Dashboard</button>
-9
 <button onclick="showPage('audit')">Audit Form</button>
-10
 <button onclick="showPage('ledger')">Case Ledger</button>
-11
 </div>
 
 <div class="container">
