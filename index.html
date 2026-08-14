@@ -1,3 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>FNOL Audit Portal</title>
+
+<style>
+
+body{
+font-family:Segoe UI,Arial,sans-serif;
+margin:0;
+background:#f3ecff;
+}
+
+header{
+background:#10233f;
+color:white;
+padding:20px;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+z-index:1000;
+}
+
+#menuBar{
+position:fixed;
+top:85px;
+left:0;
+width:100%;
+background:white;
+padding:15px;
+box-shadow:0 2px 5px rgba(0,0,0,.15);
+z-index:999;
+}
+
+.tabBtn{
+background:#10233f;
+color:white;
+border:none;
+padding:10px 20px;
+margin-right:10px;
+border-radius:6px;
+cursor:pointer;
+font-weight:bold;
+}
+
+.container{
+padding-top:170px;
+padding-left:20px;
+padding-right:20px;
+max-width:1200px;
+margin:auto;
+}
+
+.card{
+background:white;
+padding:20px;
+border-radius:10px;
+margin-bottom:20px;
+box-shadow:0 2px 8px rgba(0,0,0,.1);
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:15px;
+margin-bottom:20px;
+}
+
+.kpi{
+background:white;
+padding:20px;
+border-radius:10px;
+text-align:center;
+font-weight:bold;
+}
+
+label{
+display:block;
+margin-top:10px;
+font-weight:bold;
+}
+
+input,select,textarea{
+width:100%;
+padding:10px;
+margin-top:5px;
+box-sizing:border-box;
+}
+
+button{
+background:#10233f;
+color:white;
+padding:12px 20px;
+border:none;
+cursor:pointer;
+border-radius:5px;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+margin-top:10px;
+}
+
+th,td{
+border:1px solid #ddd;
+padding:10px;
+}
+
+th{
+background:#10233f;
+color:white;
+}
+
+</style>
+</head>
+
 <body>
 
 <header>
@@ -12,47 +131,43 @@
 
 <div class="container">
 
-<!-- DASHBOARD -->
 <div id="dashboard">
 
 <div class="grid">
 
 <div class="kpi">
 Cases Logged
-<br><span id="casesLogged">0</span>
+<br>
+<span id="casesLogged">0</span>
 </div>
 
 <div class="kpi">
 Cases Scored
-<br><span id="casesScored">0</span>
+<br>
+<span id="casesScored">0</span>
 </div>
 
 <div class="kpi">
 Avg QA Score
-<br><span id="avgScore">0%</span>
+<br>
+<span id="avgScore">0%</span>
 </div>
 
 <div class="kpi">
 Avg AHT
-<br><span id="avgAht">0</span>
+<br>
+<span id="avgAht">0</span>
 </div>
 
 </div>
 
 <div class="card">
 <h2>Dashboard</h2>
-
-<p>Dashboard charts will be added here.</p>
-
-<p>Total Cases: <span id="dashCases">0</span></p>
-
-<p>Average Score: <span id="dashScore">0%</span></p>
-
+<p>Dashboard charts can be added later.</p>
 </div>
 
 </div>
 
-<!-- AUDIT FORM -->
 <div id="audit" style="display:none;">
 
 <div class="card">
@@ -76,17 +191,6 @@ Avg AHT
 <label>Phase</label>
 <input id="phaseName" value="Phase 5">
 
-<label>Client</label>
-
-<select>
-<option>Hertz</option>
-<option>Avis</option>
-<option>Gregory</option>
-<option>Serco</option>
-<option>Kier</option>
-<option>Vodafone</option>
-</select>
-
 <label>Case ID</label>
 <input type="text" id="caseId">
 
@@ -101,10 +205,10 @@ Avg AHT
 <table>
 
 <tr>
-<th>Quality Element</th>
+<th>Element</th>
 <th>Weight</th>
 <th>Status</th>
-<th>Fail Comment</th>
+<th>Comment</th>
 </tr>
 
 <tr>
@@ -117,7 +221,7 @@ Avg AHT
 <option value="">Pending</option>
 </select>
 </td>
-<td><input class="failNote"></td>
+<td><input></td>
 </tr>
 
 <tr>
@@ -130,7 +234,7 @@ Avg AHT
 <option value="">Pending</option>
 </select>
 </td>
-<td><input class="failNote"></td>
+<td><input></td>
 </tr>
 
 <tr>
@@ -143,7 +247,7 @@ Avg AHT
 <option value="">Pending</option>
 </select>
 </td>
-<td><input class="failNote"></td>
+<td><input></td>
 </tr>
 
 <tr>
@@ -156,7 +260,7 @@ Avg AHT
 <option value="">Pending</option>
 </select>
 </td>
-<td><input class="failNote"></td>
+<td><input></td>
 </tr>
 
 <tr>
@@ -169,27 +273,26 @@ Avg AHT
 <option value="">Pending</option>
 </select>
 </td>
-<td><input class="failNote"></td>
+<td><input></td>
 </tr>
 
 </table>
 
+<br>
+
 <label>Auditor Remarks</label>
 <textarea rows="4"></textarea>
 
-<button onclick="saveAudit()">
-Save Audit
-</button>
+<br><br>
 
-<button onclick="exportData()">
-Export Data
-</button>
+<button onclick="saveAudit()">Save Audit</button>
+
+<button onclick="exportData()">Export Data</button>
 
 </div>
 
 </div>
 
-<!-- LEDGER -->
 <div id="ledger" style="display:none;">
 
 <div class="card">
@@ -208,9 +311,7 @@ Export Data
 </tr>
 </thead>
 
-<tbody id="ledgerBody">
-
-</tbody>
+<tbody id="ledgerBody"></tbody>
 
 </table>
 
@@ -268,53 +369,42 @@ document.getElementById(page).style.display="block";
 
 showPage("dashboard");
 
-document.getElementById("staffSelect")
-.addEventListener("change",function(){
+document.getElementById("staffSelect").addEventListener("change",function(){
 
-let data = staffMap[this.value];
+const data = staffMap[this.value];
 
-document.getElementById("tlName").value =
-data.tl;
-
-document.getElementById("phaseName").value =
-data.phase;
+document.getElementById("tlName").value=data.tl;
+document.getElementById("phaseName").value=data.phase;
 
 });
 
-document.querySelectorAll(".scoreItem")
-.forEach(x=>{
+document.querySelectorAll(".scoreItem").forEach(x=>{
 x.addEventListener("change",calculateScore);
 });
 
 function calculateScore(){
 
-let total = 0;
+let score = 0;
 
-document.querySelectorAll(".scoreItem")
-.forEach(x=>{
+document.querySelectorAll(".scoreItem").forEach(x=>{
 
-if(x.value!=""){
-
-total += Number(x.value);
-
+if(x.value!==""){
+score += Number(x.value);
 }
 
 });
 
-document.getElementById("liveScore")
-.innerText = total + "%";
+document.getElementById("liveScore").innerText=score+"%";
 
 }
 
 function saveAudit(){
 
-let score =
-document.getElementById("liveScore")
-.innerText;
+let score=document.getElementById("liveScore").innerText;
 
-let row = document.createElement("tr");
+let row=document.createElement("tr");
 
-row.innerHTML = `
+row.innerHTML=`
 <td>${document.getElementById("caseId").value}</td>
 <td>${document.getElementById("staffSelect").value}</td>
 <td>${document.getElementById("phaseName").value}</td>
@@ -322,11 +412,10 @@ row.innerHTML = `
 <td>${score}</td>
 `;
 
-document.getElementById("ledgerBody")
-.appendChild(row);
+document.getElementById("ledgerBody").appendChild(row);
 
 localStorage.setItem(
-"ledger",
+"fnolLedger",
 document.getElementById("ledgerBody").innerHTML
 );
 
@@ -334,22 +423,32 @@ alert("Audit Saved");
 
 }
 
-window.onload = function(){
+window.onload=function(){
 
-document.getElementById("ledgerBody").innerHTML =
-localStorage.getItem("ledger") || "";
+document.getElementById("ledgerBody").innerHTML=
+localStorage.getItem("fnolLedger")||"";
 
 };
 
 function exportData(){
 
-let data =
-localStorage.getItem("ledger") || "";
+const data=
+localStorage.getItem("fnolLedger")||"";
 
-let blob = new Blob([data]);
+const blob=
+new Blob([data],{type:"text/html"});
 
-let a =
-document.createElement("a");
+const a=document.createElement("a");
 
-a.href =
-URL.createObjectURL
+a.href=URL.createObjectURL(blob);
+
+a.download="FNOL_Audit_Data.html";
+
+a.click();
+
+}
+
+</script>
+
+</body>
+</html>
