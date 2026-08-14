@@ -1,138 +1,59 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>FNOL Audit Portal</title>
-
-<style>
-body{
-font-family:Segoe UI,Arial,sans-serif;
-margin:0;
-background:#f3ecff;
-}
-
-header{
-background:#7c3aed;
-color:white;
-padding:20px;
-position:fixed;
-top:0;
-left:0;
-width:100%;
-z-index:1000
-}
-
-.container{
-padding-top:140px;
-padding-left:20px;
-padding-right:20px;
-max-width:1200px;
-margin:auto;
-}
-
-.card{
-background:white;
-padding:20px;
-border-radius:10px;
-margin-bottom:20px;
-box-shadow:0 2px 8px rgba(0,0,0,.1);
-}
-
-.grid{
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:15px;
-margin-bottom:20px;
-}
-
-.kpi{
-background:white;
-padding:20px;
-border-radius:10px;
-text-align:center;
-font-weight:bold;
-}
-
-label{
-display:block;
-margin-top:10px;
-font-weight:bold;
-}
-
-input,select,textarea{
-width:100%;
-padding:10px;
-margin-top:5px;
-}
-
-button{
-background:#10233f;
-color:white;
-padding:12px 20px;
-border:none;
-margin-top:15px;
-cursor:pointer;
-border-radius:5px;
-}
-
-table{
-width:100%;
-border-collapse:collapse;
-}
-
-th,td{
-border:1px solid #ddd;
-padding:10px;
-}
-
-th{
-background:#10233f;
-color:white;
-}
-</style>
-</head>
-
 <body>
 
 <header>
-
 <h1>FNOL Audit Portal</h1>
-
 </header>
-  
-<div id="menuBar">
-
-<button class="tabBtn"
-onclick="showPage('dashboard')">
-Dashboard
-</button>
-
-<button class="tabBtn"
-onclick="showPage('audit')">
-Audit Form
-</button>
-  
-<button class="tabBtn"
-onclick="showPage('ledger')">
-Case Ledger
-</button>
-
-</div>
 
 <div id="menuBar">
-<button onclick="showPage('dashboard')">Dashboard</button>
-<button onclick="showPage('audit')">Audit Form</button>
-<button onclick="showPage('ledger')">Case Ledger</button>
+<button class="tabBtn" onclick="showPage('dashboard')">Dashboard</button>
+<button class="tabBtn" onclick="showPage('audit')">Audit Form</button>
+<button class="tabBtn" onclick="showPage('ledger')">Case Ledger</button>
 </div>
 
 <div class="container">
 
+<!-- DASHBOARD -->
+<div id="dashboard">
+
 <div class="grid">
-<div class="kpi">Cases Logged<br>0</div>
-<div class="kpi">Cases Scored<br>0</div>
-<div class="kpi">Avg QA Score<br>0%</div>
-<div class="kpi">Avg AHT<br>0</div>
+
+<div class="kpi">
+Cases Logged
+<br><span id="casesLogged">0</span>
 </div>
+
+<div class="kpi">
+Cases Scored
+<br><span id="casesScored">0</span>
+</div>
+
+<div class="kpi">
+Avg QA Score
+<br><span id="avgScore">0%</span>
+</div>
+
+<div class="kpi">
+Avg AHT
+<br><span id="avgAht">0</span>
+</div>
+
+</div>
+
+<div class="card">
+<h2>Dashboard</h2>
+
+<p>Dashboard charts will be added here.</p>
+
+<p>Total Cases: <span id="dashCases">0</span></p>
+
+<p>Average Score: <span id="dashScore">0%</span></p>
+
+</div>
+
+</div>
+
+<!-- AUDIT FORM -->
+<div id="audit" style="display:none;">
 
 <div class="card">
 
@@ -140,7 +61,7 @@ Case Ledger
 
 <label>Staff Name</label>
 
-<select>
+<select id="staffSelect">
 <option>Nurtashya Aina Binti Azman</option>
 <option>Vinayagan A/L Selvaraju</option>
 <option>Thivayasri A/P Jaya Kumar</option>
@@ -150,23 +71,10 @@ Case Ledger
 </select>
 
 <label>TL Name</label>
-
-<select>
-<option>Shanthini</option>
-<option>Priya</option>
-<option>Kartigeyan</option>
-<option>Shanmugam</option>
-</select>
+<input id="tlName" value="Shanthini">
 
 <label>Phase</label>
-
-<select>
-<option>Phase 1</option>
-<option>Phase 2</option>
-<option>Phase 3</option>
-<option>Phase 4</option>
-<option>Phase 5</option>
-</select>
+<input id="phaseName" value="Phase 5">
 
 <label>Client</label>
 
@@ -177,18 +85,18 @@ Case Ledger
 <option>Serco</option>
 <option>Kier</option>
 <option>Vodafone</option>
-<option>Menzies</option>
-<option>Yodel</option>
-<option>Chubb</option>
-<option>LBO</option>
-<option>Asured</option>
-<option>KN Circet</option>
 </select>
 
 <label>Case ID</label>
-<input type="text">
+<input type="text" id="caseId">
 
 <h2>Quality Assessment</h2>
+
+<p>
+<b>Current Score:
+<span id="liveScore">100%</span>
+</b>
+</p>
 
 <table>
 
@@ -196,244 +104,112 @@ Case Ledger
 <th>Quality Element</th>
 <th>Weight</th>
 <th>Status</th>
+<th>Fail Comment</th>
 </tr>
 
 <tr>
 <td>Document</td>
 <td>5%</td>
 <td>
-<select>
-<option>Pass</option>
-<option>Fail</option>
-<option>Pending</option>
+<select class="scoreItem">
+<option value="5">Pass</option>
+<option value="0">Fail</option>
+<option value="">Pending</option>
 </select>
 </td>
+<td><input class="failNote"></td>
 </tr>
 
 <tr>
 <td>Addresses</td>
 <td>10%</td>
 <td>
-<select>
-<option>Pass</option>
-<option>Fail</option>
-<option>Pending</option>
+<select class="scoreItem">
+<option value="10">Pass</option>
+<option value="0">Fail</option>
+<option value="">Pending</option>
 </select>
 </td>
+<td><input class="failNote"></td>
 </tr>
 
 <tr>
 <td>Client Details</td>
 <td>5%</td>
 <td>
-<select>
-<option>Pass</option>
-<option>Fail</option>
-<option>Pending</option>
+<select class="scoreItem">
+<option value="5">Pass</option>
+<option value="0">Fail</option>
+<option value="">Pending</option>
 </select>
 </td>
+<td><input class="failNote"></td>
 </tr>
 
 <tr>
 <td>Broker Details</td>
 <td>5%</td>
 <td>
-<select>
-<option>Pass</option>
-<option>Fail</option>
-<option>Pending</option>
+<select class="scoreItem">
+<option value="5">Pass</option>
+<option value="0">Fail</option>
+<option value="">Pending</option>
 </select>
 </td>
+<td><input class="failNote"></td>
 </tr>
 
 <tr>
 <td>Policyholder Details</td>
 <td>5%</td>
 <td>
-<select>
-<option>Pass</option>
-<option>Fail</option>
-<option>Pending</option>
+<select class="scoreItem">
+<option value="5">Pass</option>
+<option value="0">Fail</option>
+<option value="">Pending</option>
 </select>
 </td>
-</tr>
-
-<tr>
-<td>Claimant Details</td>
-<td>5%</td>
-<td>
-<select>
-<option>Pass</option>
-<option>Fail</option>
-<option>Pending</option>
-</select>
-</td>
-</tr>
-
-<tr>
-<td>Other Contact Details</td>
-<td>5%</td>
-<td>
-<select>
-<option>Pass</option>
-<option>Fail</option>
-<option>Pending</option>
-</select>
-</td>
-</tr>
-
-<tr>
-<td>Loss Date</td>
-<td>5%</td>
-<td>
-<select>
-<option>Pass</option>
-<option>Fail</option>
-<option>Pending</option>
-</select>
-</td>
-</tr>
-
-<tr>
-<td>Peril</td>
-<td>5%</td>
-<td>
-<select>
-<option>Pass</option>
-<option>Fail</option>
-<option>Pending</option>
-</select>
-</td>
-</tr>
-
-<tr>
-<td>Handling Method</td>
-<td>5%</td>
-<td>
-<select>
-<option>Pass</option>
-<option>Fail</option>
-<option>Pending</option>
-</select>
-</td>
-</tr>
-
-<tr>
-<td>Other Details</td>
-<td>5%</td>
-<td>
-<select>
-<option>Pass</option>
-<option>Fail</option>
-<option>Pending</option>
-</select>
-</td>
-</tr>
-
-<tr>
-<td>Policy Details</td>
-<td>5%</td>
-<td>
-<select>
-<option>Pass</option>
-<option>Fail</option>
-<option>Pending</option>
-</select>
-</td>
-</tr>
-
-<tr>
-<td>HOC</td>
-<td>10%</td>
-<td>
-<select>
-<option>Pass</option>
-<option>Fail</option>
-<option>Pending</option>
-</select>
-</td>
-</tr>
-
-<tr>
-<td>Motor Incident</td>
-<td>5%</td>
-<td>
-<select>
-<option>Pass</option>
-<option>Fail</option>
-<option>Pending</option>
-</select>
-</td>
-</tr>
-
-<tr>
-<td>Tasks</td>
-<td>10%</td>
-<td>
-<select>
-<option>Pass</option>
-<option>Fail</option>
-<option>Pending</option>
-</select>
-</td>
-</tr>
-
-<tr>
-<td>Acknowledgement Email</td>
-<td>5%</td>
-<td>
-<select>
-<option>Pass</option>
-<option>Fail</option>
-<option>Pending</option>
-</select>
-</td>
-</tr>
-
-<tr>
-<td>Land Related</td>
-<td>5%</td>
-<td>
-<select>
-<option>Pass</option>
-<option>Fail</option>
-<option>Pending</option>
-</select>
-</td>
+<td><input class="failNote"></td>
 </tr>
 
 </table>
-  
+
 <label>Auditor Remarks</label>
 <textarea rows="4"></textarea>
 
-<button>Save Audit</button>
+<button onclick="saveAudit()">
+Save Audit
+</button>
+
+<button onclick="exportData()">
+Export Data
+</button>
 
 </div>
+
+</div>
+
+<!-- LEDGER -->
+<div id="ledger" style="display:none;">
 
 <div class="card">
 
 <h2>Case Ledger</h2>
 
 <table>
+
 <thead>
 <tr>
 <th>Case ID</th>
 <th>Staff</th>
 <th>Phase</th>
-<th>Client</th>
 <th>TL</th>
+<th>Score</th>
 </tr>
 </thead>
 
-<tbody>
-<tr>
-<td>Example</td>
-<td>Nurtashya</td>
-<td>Phase 5</td>
-<td>Hertz</td>
-<td>Shanthini</td>
-</tr>
+<tbody id="ledgerBody">
+
 </tbody>
 
 </table>
@@ -442,5 +218,138 @@ Case Ledger
 
 </div>
 
-</body>
-</html>
+</div>
+
+<script>
+
+const staffMap = {
+
+"Nurtashya Aina Binti Azman":{
+tl:"Shanthini",
+phase:"Phase 5"
+},
+
+"Vinayagan A/L Selvaraju":{
+tl:"Shanthini",
+phase:"Phase 5"
+},
+
+"Thivayasri A/P Jaya Kumar":{
+tl:"Shanthini",
+phase:"Phase 5"
+},
+
+"Thneswary A/P Santharasekeran":{
+tl:"Shanthini",
+phase:"Phase 5"
+},
+
+"Muhammad Aiman Bin Mohamed Salleh":{
+tl:"Shanthini",
+phase:"Phase 5"
+},
+
+"Darshan A/L Murliah":{
+tl:"Shanthini",
+phase:"Phase 5"
+}
+
+};
+
+function showPage(page){
+
+document.getElementById("dashboard").style.display="none";
+document.getElementById("audit").style.display="none";
+document.getElementById("ledger").style.display="none";
+
+document.getElementById(page).style.display="block";
+
+}
+
+showPage("dashboard");
+
+document.getElementById("staffSelect")
+.addEventListener("change",function(){
+
+let data = staffMap[this.value];
+
+document.getElementById("tlName").value =
+data.tl;
+
+document.getElementById("phaseName").value =
+data.phase;
+
+});
+
+document.querySelectorAll(".scoreItem")
+.forEach(x=>{
+x.addEventListener("change",calculateScore);
+});
+
+function calculateScore(){
+
+let total = 0;
+
+document.querySelectorAll(".scoreItem")
+.forEach(x=>{
+
+if(x.value!=""){
+
+total += Number(x.value);
+
+}
+
+});
+
+document.getElementById("liveScore")
+.innerText = total + "%";
+
+}
+
+function saveAudit(){
+
+let score =
+document.getElementById("liveScore")
+.innerText;
+
+let row = document.createElement("tr");
+
+row.innerHTML = `
+<td>${document.getElementById("caseId").value}</td>
+<td>${document.getElementById("staffSelect").value}</td>
+<td>${document.getElementById("phaseName").value}</td>
+<td>${document.getElementById("tlName").value}</td>
+<td>${score}</td>
+`;
+
+document.getElementById("ledgerBody")
+.appendChild(row);
+
+localStorage.setItem(
+"ledger",
+document.getElementById("ledgerBody").innerHTML
+);
+
+alert("Audit Saved");
+
+}
+
+window.onload = function(){
+
+document.getElementById("ledgerBody").innerHTML =
+localStorage.getItem("ledger") || "";
+
+};
+
+function exportData(){
+
+let data =
+localStorage.getItem("ledger") || "";
+
+let blob = new Blob([data]);
+
+let a =
+document.createElement("a");
+
+a.href =
+URL.createObjectURL
