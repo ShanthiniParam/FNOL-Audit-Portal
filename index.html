@@ -649,19 +649,45 @@ localStorage.getItem("fnolLedger")||"";
 
 function exportData(){
 
-const data=
-localStorage.getItem("fnolLedger")||"";
+let csv = [
 
-const blob=
-new Blob([data],{type:"text/html"});
+["Case ID","Audit Date","Staff","Phase","TL","Score"]
 
-const a=document.createElement("a");
+];
 
-a.href=URL.createObjectURL(blob);
+const rows = document.querySelectorAll("#ledgerBody tr");
 
-a.download="FNOL_Audit_Data.html";
+rows.forEach(row => {
 
-a.click();
+const cols = row.querySelectorAll("td");
+
+let rowData = [];
+
+cols.forEach(col => {
+
+rowData.push('"' + col.innerText + '"');
+
+});
+
+csv.push(rowData);
+
+});
+ 
+let csvContent = csv.map(e => e.join(",")).join("\n");
+
+let blob = new Blob([csvContent], {
+
+type: "text/csv;charset=utf-8;"
+
+});
+ 
+let link = document.createElement("a");
+
+link.href = URL.createObjectURL(blob);
+
+link.download = "FNOL_Audit_Report.csv";
+
+link.click();
 
 }
 
